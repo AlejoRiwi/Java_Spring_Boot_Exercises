@@ -1,12 +1,12 @@
 package com.riwi.beautySalon.infrastructure.service;
 
 import com.riwi.beautySalon.api.dto.request.ClientRequest;
+import com.riwi.beautySalon.api.dto.response.AppoimentToClient;
 import com.riwi.beautySalon.api.dto.response.ClientResp;
 import com.riwi.beautySalon.api.dto.response.EmployeeRespo;
 import com.riwi.beautySalon.api.dto.response.ServiceResp;
 import com.riwi.beautySalon.domain.entities.Appointment;
 import com.riwi.beautySalon.domain.entities.ClientEntity;
-import com.riwi.beautySalon.domain.entities.Employee;
 import com.riwi.beautySalon.domain.repositories.ClientRepository;
 import com.riwi.beautySalon.infrastructure.abstract_service.IClientService;
 import com.riwi.beautySalon.utils.enums.SortType;
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -77,13 +76,13 @@ public class ClientService implements IClientService {
         .build();
     }
 
-    private AppointmentToClient entiyToResponseAppointment (Appointment entity) {
+    private AppoimentToClient entiyToResponseAppointment (Appointment entity) {
         ServiceResp service = new ServiceResp();
         BeanUtils.copyProperties(entity.getService(),service);
 
         EmployeeRespo employee = new EmployeeRespo();
         BeanUtils.copyProperties(entity.getEmployee(),employee);
-        return AppointmentToClient.builder()
+        return AppoimentToClient.builder()
                 .id(entity.getId())
                 .dateTime(entity.getDataTime())
                 .duration(entity.getDuration())
